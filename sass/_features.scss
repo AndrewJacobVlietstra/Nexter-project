@@ -2,15 +2,29 @@
     grid-column: center-start / center-end;
 
     margin: 15rem 0;
-    display: grid;
-    // grid-template-columns: repeat(3, 1fr);
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); // allows responsive grid with no media queries for it
-    grid-gap: 6rem;
-    align-items: start;
+
+    // now if a browser that didnt support grid opened up this page it would still look similar due to the floats
+    @supports(display: grid) {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); // allows responsive grid with no media queries for it
+        grid-gap: 6rem;
+        align-items: start;
+    }
     
 }
 
 .feature {
+
+    float: right;
+    width: 33.3333%;
+    margin-bottom: 6rem;
+
+    // If displayed as grid, it will ignore floats, inline-block, display table-cell and vertical align
+    // so all we need to do is to reset the width and set margin-bottom back to 0
+    @supports(display: grid) {
+        width: auto;
+        margin-bottom: 0;
+    }
 
     display: grid;
     grid-template-columns: min-content 1fr;
